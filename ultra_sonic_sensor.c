@@ -47,6 +47,9 @@ void loop() {
       digitalWrite(relayPin,  HIGH); // turn on pump
       pump_status = 1;
     }
+
+    //todo dry run protection
+
     if (pump_status == 1) {
       Serial.println("Pump is ON");
     } else {
@@ -56,5 +59,6 @@ void loop() {
     Serial.print(distance);
     Serial.print("--");
   }
+  // Get status every two seconds
   delay(2000); // delay for 2 seconds
 }
