@@ -4,6 +4,8 @@
 // defines variables
 long duration; // variable for the duration of sound wave travel
 int distance; // variable for the distance measurement
+// always start pump at initialization
+int pump_status = 1; // variable for the pump status
 const long sound_speed = 0.034; // sound speed in cm/s
 const int tank_height = 140; // tank height in cm
 const int stop_distance = 25; // distance to stop in cm
@@ -35,15 +37,16 @@ void loop() {
     Serial.println("Out of range");
   } else {
     // stop at 25 cm
-    if (distance < 25) {
-      Serial.println("Stop");
+    if (distance < 25 && pump_status == 1) {
+      Serial.println("Stop Pump");
+      pump_status = 0;
       // start if water level goes beyond 90 cm
-    } else if (distance > 90) {
-      Serial.println("Start");
+    } else if (distance > 90 && pump_status == 0) {
+      Serial.println("Start Pump");
+      pump_status = 1;
     }
-    Serial.print("Distance: ");
-    Serial.println(distance);
-    Serial.println(" cm");
+    Serial.print("Pump Status: " + pump_status);
+    Serial.print("Distance: " + distance);
   }
-  delay(5000) // delay for 5 seconds
+  delay(2000) // delay for 5 seconds
 }
