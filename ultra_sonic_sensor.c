@@ -45,4 +45,5 @@ void loop() {
     Serial.println(distance);
     Serial.println(" cm");
   }
+  delay(5000) // delay for 5 seconds
 }
