@@ -5,12 +5,7 @@
 long duration; // variable for the duration of sound wave travel
 int distance; // variable for the distance measurement
 // always start pump at initialization
-int pump_status = 1; // variable for the pump status
-const long sound_speed = 0.034; // sound speed in cm/s
-const int tank_height = 140; // tank height in cm
-const int stop_distance = 25; // distance to stop in cm
-const int start_distance = 90; // distance to start in cm
-const int max_distance = 300; // maximum distance in cm
+int pump_status; // variable for the pump status
 
 void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
@@ -18,6 +13,7 @@ void setup() {
   Serial.begin(9600); // // Serial Communication is starting with 9600 of baudrate speed
   Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
   Serial.println("with Arduino UNO R3");
+  pump_status = 1; // set pump status to 1 (ON)
 }
 void loop() {
   // Clears the trigPin condition
@@ -45,8 +41,13 @@ void loop() {
       Serial.println("Start Pump");
       pump_status = 1;
     }
-    Serial.print("Pump Status: " + pump_status);
-    Serial.print("Distance: " + distance);
+    if pump_status == 1 {
+      Serial.println("Pump is ON");
+    } else {
+      Serial.println("Pump is OFF");
+    }
+    Serial.print("Distance: ");
+    Serial.print(distance);
   }
-  delay(2000) // delay for 5 seconds
+  delay(2000); // delay for 2 seconds
 }
