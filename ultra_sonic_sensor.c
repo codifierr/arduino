@@ -28,15 +28,17 @@ void loop() {
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echoPin, HIGH);
   // Calculating the distance
-  distance = duration * sound_speed / 2; // Speed of sound wave divided by 2 (go and back)
+  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
   // Displays the distance on the Serial Monitor
-
-  if (distance > max_distance) {
+// max distance is 300 cm
+  if (distance > 300) {
     Serial.println("Out of range");
   } else {
-    if (distance < stop_distance) {
+    // stop at 25 cm
+    if (distance < 25) {
       Serial.println("Stop");
-    } else if (distance > start_distance) {
+      // start if water level goes beyond 90 cm
+    } else if (distance > 90) {
       Serial.println("Start");
     }
     Serial.print("Distance: ");
