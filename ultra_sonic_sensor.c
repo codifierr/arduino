@@ -4,6 +4,11 @@
 // defines variables
 long duration; // variable for the duration of sound wave travel
 int distance; // variable for the distance measurement
+const long sound_speed = 0.034; // sound speed in cm/s
+const int tank_height = 140; // tank height in cm
+const int stop_distance = 25; // distance to stop in cm
+const int start_distance = 90; // distance to start in cm
+const int max_distance = 300; // maximum distance in cm
 
 void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
@@ -23,9 +28,19 @@ void loop() {
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echoPin, HIGH);
   // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  distance = duration * sound_speed / 2; // Speed of sound wave divided by 2 (go and back)
   // Displays the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
+
+  if (distance > max_distance) {
+    Serial.println("Out of range");
+  } else {
+    if (distance < stop_distance) {
+      Serial.println("Stop");
+    } else if (distance > start_distance) {
+      Serial.println("Start");
+    }
+    Serial.print("Distance: ");
+    Serial.println(distance);
+    Serial.println(" cm");
+  }
 }
