@@ -7,7 +7,7 @@ Automatic Water controller for Arduino based on the Ultrasonic sensor.
 []: # Compare this snippet from LICENSE: \
 []: # MIT License \
 []: # \
-[]: # Path: ultra_sonic/ultra_sonic.ino \
+[]: # Path: ultra_sonic/water_level_controller.ino \
 
 ## About the Project
 
