@@ -11,7 +11,7 @@ Automatic Water controller for Arduino based on the Ultrasonic sensor.
 
 ## About the Project
 
-This project make use of the [Ultrasonic Sensor](https://www.arduino.cc/en/Reference/UltrasonicSensor) to control the water level. It is a simple project that can be used to control the water level of a water tank. When the water level is low based on predefined value, the water level sensor will send a signal to the Arduino. The Arduino will then turn on the water pump to make the water level higher.
+This project make use of the [Ultrasonic Sensor](https://arduinogetstarted.com/tutorials/arduino-ultrasonic-sensor) to control the water level. It is a simple project that can be used to control the water level of a water tank. When the water level is low based on predefined value, the water level sensor will send a signal to the Arduino. The Arduino will then turn on the water pump to make the water level higher.
 
 ## Features
 
