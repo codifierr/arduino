@@ -47,6 +47,19 @@ void setup()
         i--;
     }
     Serial.println(" Initialization complete");
+
+    setUpWaterLevelController(); // call the function to set up the water level controller
+}
+
+void loop()
+{
+    waterLevelController(); // call the function to control the water level
+    // Get status every two seconds
+    delay(2000); // delay for 2 seconds
+}
+
+void setUpWaterLevelController()
+{
     int distance = getDistance();
     int level = getWaterLevel(distance);
     pump_start_level = getWaterLevelInPercentage(level);
@@ -199,8 +212,7 @@ void processDryRunProtect(int level)
     }
 }
 
-void loop()
-{
+void waterLevelController(){
     int distance = getDistance();
     int level = getWaterLevel(distance);
     int per = getWaterLevelInPercentage(level);
@@ -208,9 +220,10 @@ void loop()
     if (distance > max_range)
     {
         Serial.println(" Tank Height is more than supported range of " + String(max_range) + " cm");
-        // As a precaution stop pump 
+        // As a precaution stop pump
         stopPump();
-    } else if(level < 0)
+    }
+    else if (level < 0)
     {
         Serial.println(" Sensor distance is more than the tank capacity");
         // As a precaution stop pump
@@ -234,15 +247,14 @@ void loop()
         int per = getWaterLevelInPercentage(level);
         Serial.print(" Water level is " + String(per) + "%");
 
-        if (pump_switch){
+        if (pump_switch)
+        {
             processDryRunProtect(per);
         }
 
         printPumpStatus();
 
         // print the water distance in Serial Monitor
-        //Serial.print(" Distance: " + String(distance) + " cm");
+        // Serial.print(" Distance: " + String(distance) + " cm");
     }
-    // Get status every two seconds
-    delay(2000); // delay for 2 seconds
 }
